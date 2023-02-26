@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.StudentController">
+   <top>
+      <HBox alignment="CENTER" prefHeight="75.0" prefWidth="912.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Find by id" />
+            <TextField fx:id="searchField" />
+            <Button mnemonicParsing="false" onAction="#findById">
+               <graphic>
+                  <FontAwesomeIcon glyphName="SEARCH" />
+               </graphic>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </top>
+   <left>
+      <VBox alignment="CENTER" prefHeight="528.0" prefWidth="182.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+            <TextField fx:id="nameField" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Age" />
+            <TextField fx:id="ageField" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="182.0" spacing="5.0">
+               <children>
+                  <Text fx:id="prof" strokeType="OUTSIDE" strokeWidth="0.0" text="Profil pic" />
+                  <Button mnemonicParsing="false" onAction="#browseFiles">
+                     <graphic>
+                        <FontAwesomeIcon glyphName="IMAGE" size="1.4em" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#addStudent">
+               <graphic>
+                  <FontAwesomeIcon glyphName="PLUS" size="1.2em" />
+               </graphic>
+            </Button>
+            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+      </VBox>
+   </left>
+</BorderPane>
