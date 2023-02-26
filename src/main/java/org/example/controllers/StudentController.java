@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * @author Jozef
  */
-public class StudentController implements Initializable{
+public class StudentController implements Initializable {
     @FXML
     Button button;
     @FXML
@@ -38,27 +38,27 @@ public class StudentController implements Initializable{
     final FileChooser fileChooser = new FileChooser();
 
     @FXML
-    public void addStudent(){
+    public void addStudent() {
         errorText.setText("");
-        if(nameField.getText().isEmpty() || ageField.getText().isEmpty()){
+        if (nameField.getText().isEmpty() || ageField.getText().isEmpty()) {
             errorText.setText("Name and age are required");
             return;
         }
         Student student = new Student();
         student.setName(nameField.getText());
         student.setAge(Integer.parseInt(ageField.getText()));
-        student.setProfilePicUrl(UploadAPI.UPLOAD_PATH+prof.getText());
+        student.setProfilePicUrl(UploadAPI.UPLOAD_PATH + prof.getText());
         student = studentDao.add(student);
         System.out.println(student);
     }
 
-    public void findById(){
+    public void findById() {
         System.out.println("jaw");
     }
 
-    public void browseFiles(){
+    public void browseFiles() {
         File file = fileChooser.showOpenDialog(null);//stage);
-        if (file != null){
+        if (file != null) {
             try {
                 String newName = UploadAPI.upload(file);
                 Image image = new Image(new FileInputStream(file));
@@ -75,9 +75,20 @@ public class StudentController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../../interfaces/StudentItem.fxml")));
         try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../../interfaces/StudentItem.fxml")));
-            this.borderPane.setCenter(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../interfaces/StudentItem.fxml"));
+            //Parent root1 = loader.getRoot();
+
+            Node node = loader.load();
+
+            Student student = new Student(0, "Jaw", 22, "http://localhost/uploads/images/63fb96f462792.jpg");
+            StudentItemController studentItemController = loader.getController();
+            studentItemController.setData(student);
+
+            this.borderPane.setCenter(node);
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
