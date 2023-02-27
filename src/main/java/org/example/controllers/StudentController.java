@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import javafx.collections.*;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -31,7 +32,11 @@ public class StudentController implements Initializable {
     Text prof;
     @FXML
     BorderPane borderPane;
+    @FXML
+    VBox personVbox;
     IStudentDao studentDao = new StudentDao();
+
+    ObservableList<Student> students = null;
 
     Stage stage = new Stage();
 
@@ -49,6 +54,7 @@ public class StudentController implements Initializable {
         student.setAge(Integer.parseInt(ageField.getText()));
         student.setProfilePicUrl(UploadAPI.UPLOAD_PATH + prof.getText());
         student = studentDao.add(student);
+        addCardToScrollPane(FXCollections.observableArrayList(student));
         System.out.println(student);
     }
 
@@ -61,7 +67,6 @@ public class StudentController implements Initializable {
         if (file != null) {
             try {
                 String newName = UploadAPI.upload(file);
-                Image image = new Image(new FileInputStream(file));
                 prof.setText(newName);
 
             } catch (FileNotFoundException e) {
@@ -75,19 +80,22 @@ public class StudentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../../interfaces/StudentItem.fxml")));
+        this.students = studentDao.getAll();
+        addCardToScrollPane(this.students);
+
+    }
+
+    public void addCardToScrollPane(ObservableList<Student> students){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../interfaces/StudentItem.fxml"));
-            //Parent root1 = loader.getRoot();
+            for (Student st : students) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../interfaces/StudentItem.fxml"));
+                Node node = loader.load();
 
-            Node node = loader.load();
+                StudentItemController studentItemController = loader.getController();
+                studentItemController.setData(st);
 
-            Student student = new Student(0, "Jaw", 22, "http://localhost/uploads/images/63fb96f462792.jpg");
-            StudentItemController studentItemController = loader.getController();
-            studentItemController.setData(student);
-
-            this.borderPane.setCenter(node);
-
+                personVbox.getChildren().add(node);
+            }
 
         } catch (IOException e) {
             throw new RuntimeException(e);

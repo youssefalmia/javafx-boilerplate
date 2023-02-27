@@ -28,6 +28,9 @@ public class StudentItemController implements Initializable {
     public void setData(Student student) {
         this.Name.setText(student.getName());
         this.Age.setText(String.valueOf(student.getAge()));
-        this.profilPic.setImage(new Image(student.getProfilePicUrl()));
+        if(student.getProfilePicUrl() != null){
+            this.profilPic.setImage(new Image(student.getProfilePicUrl()));
+        }
     }
+
 }

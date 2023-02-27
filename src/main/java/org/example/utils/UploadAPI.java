@@ -12,7 +12,7 @@ import java.io.*;
 
 /**
  *
- * @author Bilel
+ * @author Jozef
  */
 public class UploadAPI {
     public static String UPLOAD_PATH = "http://localhost/uploads/images/";
