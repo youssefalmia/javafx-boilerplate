@@ -65,26 +65,22 @@ public class StudentController implements Initializable {
         student.setAge(Integer.parseInt(ageField.getText()));
         student.setProfilePicUrl(UploadAPI.UPLOAD_PATH + prof.getText());
         student = studentDao.add(student);
+        students.add(student);
         addCardToScrollPane(FXCollections.observableArrayList(student));
     }
 
     public void findById() {
+        personVbox.getChildren().clear();
         if(searchField.getText().isEmpty()){
-            addCardToScrollPane(this.students);
+            addCardToScrollPane(studentDao.getAll());
             return;
         }
         int studentId = Integer.parseInt(searchField.getText());
-        Node node = personVbox.getChildren().stream()
-                .filter(e -> {
-                    int studentIdFromBorderpane = Integer.parseInt(((Text)((BorderPane)e).getTop()).getText());
-                    return studentIdFromBorderpane == studentId;
-                })
-                .findFirst()
-                .orElse(null);
-
-        if (node != null) {
-            personVbox.getChildren().setAll(node);
+        Student st = studentDao.getById(studentId);
+        if( st.getId() == 0){
+            return;
         }
+        addCardToScrollPane(FXCollections.observableArrayList(st));
     }
 
 
@@ -132,6 +128,8 @@ public class StudentController implements Initializable {
         personVbox.getChildren().stream().filter(e -> e.hashCode() == hashcode).forEach(e -> System.out.println(e.hashCode()));
 
         personVbox.getChildren().removeIf(e -> e.hashCode() == hashcode);
+
+        students.removeIf(e->e.getId()==studentId);
 
         studentDao.deleteById(studentId);
 
