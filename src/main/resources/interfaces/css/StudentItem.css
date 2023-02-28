@@ -1,0 +1,17 @@
+.label,.text{
+    -fx-text-fill: #fff4f4;
+    -fx-font-size: 20px;
+}
+
+#item{
+    -fx-background-color: #554c3f;
+    /*-fx-opacity: 0.8;*/
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+
+}
+/*#item:hover{*/
+/*    -fx-opacity: 1;*/
+/*}*/
+
+

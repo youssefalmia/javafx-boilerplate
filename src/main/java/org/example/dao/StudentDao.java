@@ -89,6 +89,14 @@ public class StudentDao implements IStudentDao {
 
     @Override
     public void deleteById(int id) {
+        String req = "delete from student where id=?";
+        try {
+            ps = connection.prepareStatement(req);
+            ps.setInt(1,id);
 
+            ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

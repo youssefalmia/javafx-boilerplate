@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="263.0" style="-fx-background-color: gray;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.StudentItemController">
+<BorderPane fx:id="item" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="234.0" prefWidth="263.0" stylesheets="@css/StudentItem.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controllers.StudentItemController">
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,11 +19,23 @@
             </VBox>
             <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="294.0" prefWidth="141.0" spacing="50.0">
                <children>
-                  <Text fx:id="Name" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                  <Text fx:id="Age" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text fx:id="Name" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text fx:id="Age" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <HBox alignment="CENTER" prefHeight="56.0" prefWidth="113.0" spacing="5.0">
+                     <children>
+                        <Button fx:id="deleteBtn" mnemonicParsing="false" textFill="#b70909">
+                           <graphic>
+                              <FontAwesomeIcon glyphName="TRASH" size="1.3em" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
       </HBox>
    </center>
+   <top>
+      <Text fx:id="idText" strokeType="OUTSIDE" strokeWidth="0.0" BorderPane.alignment="CENTER" />
+   </top>
 </BorderPane>
