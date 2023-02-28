@@ -53,52 +53,29 @@ public class StudentController implements Initializable {
 
     final FileChooser fileChooser = new FileChooser();
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
     // This method adds a new student to the system
     @FXML
     public void addStudent() {
-        // Clear the error text
-        errorText.setText("");
-        // Check if the name and age fields are empty
-        if (nameField.getText().isEmpty() || ageField.getText().isEmpty()) {
-            // Set the error text to indicate that the name and age are required and return
-            errorText.setText("Name and age are required");
-            return;
-        }
-        // Create a new Student object and set its name, age, and profile picture URL
-        Student student = new Student();
-        student.setName(nameField.getText());
-        student.setAge(Integer.parseInt(ageField.getText()));
-        student.setProfilePicUrl(UploadAPI.UPLOAD_PATH + prof.getText());
-        // Add the student to the database
-        student = studentDao.add(student);
-        // Add the student card to the scroll pane
-        addCardToScrollPane(FXCollections.observableArrayList(student));
+
     }
 
     public void findById() {
-        // Clear the previous results
-        personVbox.getChildren().clear();
 
-        // Check if searchField is empty
-        if (searchField.getText().isEmpty()) {
-            // If searchField is empty, show all students
-            addCardToScrollPane(studentDao.getAll());
-            return;
-        }
-
-        // If searchField is not empty, find the student with the given ID
-        int studentId = Integer.parseInt(searchField.getText());
-        Student st = studentDao.getById(studentId);
-
-        // If student is not found, do nothing
-        if (st.getId() == 0) {
-            return;
-        }
-
-        // Show the found student
-        addCardToScrollPane(FXCollections.observableArrayList(st));
     }
 
+
+    public void addCardToScrollPane(ObservableList<Student> students) {
+
+    }
+
+    public void deleteNode(int hashcode, int studentId) {
+
+    }
 
     public void browseFiles() {
         File file = fileChooser.showOpenDialog(null);
@@ -112,39 +89,5 @@ public class StudentController implements Initializable {
                 throw new RuntimeException(e);
             }
         }
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        scroll.setFitToWidth(true);
-        addCardToScrollPane(studentDao.getAll());
-    }
-
-    public void addCardToScrollPane(ObservableList<Student> students) {
-        try {
-            for (Student st : students) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../../../interfaces/StudentItem.fxml"));
-                Node node = loader.load();
-
-                // Set the data of the corresponding StudentItemController
-                StudentItemController studentItemController = loader.getController();
-                studentItemController.setData(st);
-
-                // Add the StudentItem to the VBox
-                personVbox.getChildren().add(node);
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void deleteNode(int hashcode, int studentId) {
-        // Remove the Node with the given hashcode from the VBox
-        personVbox.getChildren().removeIf(e -> e.hashCode() == hashcode);
-
-        // Delete the corresponding student from the database
-        studentDao.deleteById(studentId);
-
     }
 }
