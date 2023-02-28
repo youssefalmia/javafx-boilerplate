@@ -1,16 +1,12 @@
 package org.example.controllers;
 
-import javafx.event.*;
 import javafx.fxml.*;
-import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 import org.example.model.*;
 
-import java.io.*;
 import java.net.*;
 import java.util.*;
 
@@ -22,9 +18,9 @@ public class StudentItemController implements Initializable {
     @FXML
     private ImageView profilPic;
     @FXML
-    private Text Name;
+    private Text name;
     @FXML
-    private Text Age;
+    private Text age;
     @FXML
     private Text idText;
     @FXML
@@ -51,10 +47,13 @@ public class StudentItemController implements Initializable {
         });
     }
 
+    // So that when we add a student from StudentController, we can set its data in here
     public void setData(Student student) {
-        this.Name.setText(student.getName());
-        this.Age.setText(String.valueOf(student.getAge()));
+        this.name.setText(student.getName());
+        this.age.setText(String.valueOf(student.getAge()));
         this.idText.setText(String.valueOf(student.getId()));
+
+        // If the student has a profile picture URL, set the profile picture to that image
         if (student.getProfilePicUrl() != null) {
             this.profilPic.setImage(new Image(student.getProfilePicUrl()));
         }

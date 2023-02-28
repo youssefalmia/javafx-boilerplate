@@ -68,7 +68,7 @@ public class StudentDao implements IStudentDao {
             ps.setInt(1, student.getId());
             ps.setString(2, student.getName());
             ps.setInt(3, student.getAge());
-            ps.setString(4,student.getProfilePicUrl());
+            ps.setString(4, student.getProfilePicUrl());
             ps.execute();
 
             rs = ps.getGeneratedKeys();
@@ -92,7 +92,7 @@ public class StudentDao implements IStudentDao {
         String req = "delete from student where id=?";
         try {
             ps = connection.prepareStatement(req);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
 
             ps.execute();
         } catch (SQLException e) {
