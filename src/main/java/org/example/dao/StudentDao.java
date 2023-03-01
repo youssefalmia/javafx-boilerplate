@@ -10,32 +10,9 @@ import java.sql.*;
  * @author Jozef
  */
 public class StudentDao implements IStudentDao {
-
     Connection connection = DataSource.getInstance().getCnx();
     PreparedStatement ps = null;
     ResultSet rs = null;
-
-    @Override
-    public Student getById(int id) {
-        String req = "select * from student where id=?";
-        Student student = new Student();
-        try {
-            ps = connection.prepareStatement(req);
-            ps.setInt(1, id);
-
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                student.setId(rs.getInt(1));
-                student.setName(rs.getString(2));
-                student.setAge(rs.getInt(3));
-                student.setProfilePicUrl(rs.getString(4));
-            }
-
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return student;
-    }
 
     @Override
     public ObservableList<Student> getAll() {
@@ -57,6 +34,28 @@ public class StudentDao implements IStudentDao {
             throw new RuntimeException(e);
         }
         return students;
+    }
+
+    @Override
+    public Student getById(int id) {
+        String req = "select * from student where id=?";
+        Student student = new Student();
+        try {
+            ps = connection.prepareStatement(req);
+            ps.setInt(1, id);
+
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                student.setId(rs.getInt(1));
+                student.setName(rs.getString(2));
+                student.setAge(rs.getInt(3));
+                student.setProfilePicUrl(rs.getString(4));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return student;
     }
 
     @Override

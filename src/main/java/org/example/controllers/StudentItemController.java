@@ -26,6 +26,18 @@ public class StudentItemController implements Initializable {
     @FXML
     private Button deleteBtn;
 
+    // So that when we add a student from StudentController, we can set its data in here
+    public void setData(Student student) {
+        this.name.setText(student.getName());
+        this.age.setText(String.valueOf(student.getAge()));
+        this.idText.setText(String.valueOf(student.getId()));
+
+        // If the student has a profile picture URL, set the profile picture to that image
+        if (student.getProfilePicUrl() != null) {
+            this.profilPic.setImage(new Image(student.getProfilePicUrl()));
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         System.out.println("test");
@@ -45,18 +57,6 @@ public class StudentItemController implements Initializable {
             // Call the deleteNode() method of the StudentController singleton instance, passing in the hash code and student ID
             StudentController.getInstance().deleteNode(hashCode, studentId);
         });
-    }
-
-    // So that when we add a student from StudentController, we can set its data in here
-    public void setData(Student student) {
-        this.name.setText(student.getName());
-        this.age.setText(String.valueOf(student.getAge()));
-        this.idText.setText(String.valueOf(student.getId()));
-
-        // If the student has a profile picture URL, set the profile picture to that image
-        if (student.getProfilePicUrl() != null) {
-            this.profilPic.setImage(new Image(student.getProfilePicUrl()));
-        }
     }
 
 

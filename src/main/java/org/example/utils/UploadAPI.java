@@ -11,7 +11,6 @@ import java.io.*;
 
 
 /**
- *
  * @author Jozef
  */
 public class UploadAPI {
@@ -36,9 +35,9 @@ public class UploadAPI {
             try {
                 System.out.println(response.getStatusLine());
                 HttpEntity resEntity = response.getEntity();
-                if (resEntity != null) {                                        
+                if (resEntity != null) {
                     String responseXml = EntityUtils.toString(resEntity);
-                    fileName+= responseXml;
+                    fileName += responseXml;
                 }
                 EntityUtils.consume(resEntity);
             } finally {
@@ -49,5 +48,4 @@ public class UploadAPI {
         }
         return fileName;
     }
-
 }
