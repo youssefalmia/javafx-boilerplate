@@ -40,8 +40,6 @@ public class StudentItemController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("test");
-
         // Set a mouse click event handler for the delete button
         deleteBtn.setOnMouseClicked(event -> {
             // Retrieve the border pane that contains the delete button, using a series of getParent() calls
